@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -12,7 +12,7 @@ public class TestGoogle {
         driver.manage().window().maximize();
         driver.get("https://www.google.com/");
 
-        Assertions.assertEquals("Google", driver.getTitle());
+        Assert.assertEquals("Google", driver.getTitle());
 
         driver.quit();
     }
