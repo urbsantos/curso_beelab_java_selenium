@@ -42,6 +42,8 @@ public class DesafioCadastroSucesso {
         Assert.assertTrue(driver.findElement(By.id("descEscolaridade")).getText().endsWith("mestrado"));
         Assert.assertTrue(driver.findElement(By.id("descEsportes")).getText().endsWith("Corrida"));
 
+        driver.quit();
+
     }
 
     @Test
