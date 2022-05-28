@@ -1,4 +1,6 @@
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -8,12 +10,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TestAlert {
 
-    @Test
-    public void deveInteragirComAlertSimples(){
-        WebDriver driver = new FirefoxDriver();
+    private WebDriver driver;
+    @Before
+    public void inicializa(){
+        driver = new FirefoxDriver();
         driver.manage().window().setSize(new Dimension(1200, 765));
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+    }
 
+    @After
+    public void finaliza(){
+        driver.quit();
+    }
+
+    @Test
+    public void deveInteragirComAlertSimples(){
         driver.findElement(By.id("alert")).click();
         Alert alert = driver.switchTo().alert();
         String texto = alert.getText();
@@ -25,10 +36,6 @@ public class TestAlert {
 
     @Test
     public void deveInteragirComAlertConfirm(){
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(1200, 765));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-
         driver.findElement(By.id("confirm")).click();
         Alert alerta = driver.switchTo().alert();
         Assert.assertEquals("Confirm Simples", alerta.getText());
@@ -42,16 +49,10 @@ public class TestAlert {
         alerta.dismiss();
         Assert.assertEquals("Negado", alerta.getText());
         alerta.dismiss();
-
-        driver.quit();
     }
 
     @Test
     public void deveInteragirComAlertCPrompt() {
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().setSize(new Dimension(1200, 765));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-
         driver.findElement(By.id("prompt")).click();
         Alert alerta = driver.switchTo().alert();
         Assert.assertEquals("Digite um numero", alerta.getText());
@@ -61,8 +62,5 @@ public class TestAlert {
         alerta.accept();
         Assert.assertEquals(":D", alerta.getText());
         alerta.accept();
-
-        driver.quit();
-
     }
 }
