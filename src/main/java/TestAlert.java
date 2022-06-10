@@ -11,11 +11,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class TestAlert {
 
     private WebDriver driver;
+    private DSL dsl;
     @Before
     public void inicializa(){
         driver = new FirefoxDriver();
         driver.manage().window().setSize(new Dimension(1200, 765));
         driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        dsl = new DSL(driver);
     }
 
     @After
@@ -25,7 +27,7 @@ public class TestAlert {
 
     @Test
     public void deveInteragirComAlertSimples(){
-        driver.findElement(By.id("alert")).click();
+        dsl.clicarBotao("alert");
         Alert alert = driver.switchTo().alert();
         String texto = alert.getText();
         Assert.assertEquals("Alert Simples", texto);

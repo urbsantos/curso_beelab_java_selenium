@@ -28,8 +28,8 @@ public class DesafioCadastroSucesso {
 
     @Test
     public void deveRealizarCadastroComSucesso(){
-        dsl.escreve("elementosForm:nome", "Urbano");
-        dsl.escreve("elementosForm:sobrenome", "Santos");
+        dsl.escrever("elementosForm:nome", "Urbano");
+        dsl.escrever("elementosForm:sobrenome", "Santos");
         dsl.clicarRadio("elementosForm:sexo:0");
         dsl.clicarCheckbox("elementosForm:comidaFavorita:2");
         dsl.selecionarCombo("elementosForm:escolaridade", "Mestrado");
