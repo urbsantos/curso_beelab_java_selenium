@@ -2,7 +2,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +10,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class TesteFramesEJanelas {
 
     private WebDriver driver;
+
+    private DSL dsl;
+
     @Before
     public void inicializa(){
         driver = new FirefoxDriver();
@@ -25,26 +27,22 @@ public class TesteFramesEJanelas {
 
     @Test
     public void deveInteragirComFrames(){
-        driver.switchTo().frame("frame1");
-        driver.findElement(By.id("frameButton")).click();
-        Alert alert = driver.switchTo().alert();
-        String msg = alert.getText();
+        dsl.entrarFrame("frame1");
+        dsl.clicarBotao("frameButton");
+        String msg = dsl.alertaObterTextoEAceita();
         Assert.assertEquals("Frame OK!", msg);
-        alert.accept();
-
-        driver.switchTo().defaultContent(); //trazer para página principal
-        driver.findElement(By.id("elementosForm:nome")).sendKeys(msg);
+        dsl.sairFrame();
+        dsl.escrever("elementosForm:nome", msg);
     }
 
     @Test
     public void deveInteragirComJanelas(){
-        driver.findElement(By.id("buttonPopUpEasy")).click();
-        driver.switchTo().window("Popup");
-        driver.findElement(By.tagName("textarea")).sendKeys("Deu certo?");
+        dsl.clicarBotao("buttonPopUpEasy");
+        dsl.trocarJanela("Popup");
+        dsl.escrever(By.tagName("textarea"), "Deu certo?");
         driver.close();
-        driver.switchTo().window("");
-        driver.findElement(By.tagName("textarea")).sendKeys("e agora?");
-
+        dsl.trocarJanela("");
+        dsl.escrever(By.tagName("textarea"), "e agora?");
     }
 
     @Test

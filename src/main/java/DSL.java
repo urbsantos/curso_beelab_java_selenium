@@ -151,7 +151,7 @@ public class DSL {
         driver.switchTo().frame(id);
     }
 
-    public void sairFrame(String id){
+    public void sairFrame(){
         driver.switchTo().defaultContent();
     }
 
