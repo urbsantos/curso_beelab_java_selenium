@@ -35,7 +35,7 @@ public class TesteCadastro {
         page.setSexoMasculino();
         page.setComidaPizza();
         page.setEscolaridade("Mestrado");
-        page.setEsportes("Natação");
+        page.setEsportes("Natacao");
         page.cadastrar();
 
         Assert.assertTrue(page.obterResultadoCadastro().startsWith("Cadastrado!"));
@@ -49,42 +49,37 @@ public class TesteCadastro {
 
     @Test
     public void deveValidarNomeObrigatorio(){
-        driver.findElement(By.id("elementosForm:cadastrar")).click();
-        Alert alert = driver.switchTo().alert();
-        Assert.assertEquals("Nome eh obrigatorio", alert.getText());
+        page.cadastrar();
+        Assert.assertEquals("Nome eh obrigatorio", dsl.alertaObterTextoEAceita());
     }
 
     @Test
     public void deveValidarSobrenomeObrigatorio(){
-        driver.findElement(By.id("elementosForm:nome")).sendKeys("Urbano");
-        driver.findElement(By.id("elementosForm:cadastrar")).click();
-        Alert alert = driver.switchTo().alert();
-        Assert.assertEquals("Sobrenome eh obrigatorio", alert.getText());
+        page.setNome("Urbano");
+        page.cadastrar();
+        Assert.assertEquals("Sobrenome eh obrigatorio", dsl.alertaObterTextoEAceita());
     }
 
     @Test
     public void deveValidarSexoObrigatorio(){
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-
-        driver.findElement(By.id("elementosForm:nome")).sendKeys("Urbano");
-        driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Santos");
-        driver.findElement(By.id("elementosForm:cadastrar")).click();
-        Alert alert = driver.switchTo().alert();
-        Assert.assertEquals("Sexo eh obrigatorio", alert.getText());
+        page.setNome("Urbano");
+        page.setSobrenome("Santos");
+        page.cadastrar();
+        Assert.assertEquals("Sexo eh obrigatorio", dsl.alertaObterTextoEAceita());
     }
 
     @Test
     public void deveValidarComidaVegetariana(){
-        driver.findElement(By.id("elementosForm:nome")).sendKeys("Urbano");
-        driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Santos");
-        driver.findElement(By.id("elementosForm:sexo:0")).click();
-        driver.findElement(By.id("elementosForm:comidaFavorita:0")).click();
-        driver.findElement(By.id("elementosForm:comidaFavorita:3")).click();
-        driver.findElement(By.id("elementosForm:cadastrar")).click();
-        Alert alert = driver.switchTo().alert();
-        Assert.assertEquals("Tem certeza que voce eh vegetariano?", alert.getText());
+        page.setNome("Urbano");
+        page.setSobrenome("Santos");
+        page.setSexoMasculino();
+        page.setComidaPizza();
+        page.setEscolaridade("Mestrado");
+        page.setEsportes("Natacao");
+        page.setComidaCarne();
+        page.setComidaVegetariana();
+        page.cadastrar();
+        Assert.assertEquals("Tem certeza que voce eh vegetariano?", dsl.alertaObterTextoEAceita());
     }
 
     @Test

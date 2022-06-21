@@ -33,6 +33,10 @@ public class CampoTreinamentoPage {
         dsl.clicarCheckbox("elementosForm:comidaFavorita:2");
     }
 
+    public void setComidaVegetariana(){
+        dsl.clicarCheckbox("elementosForm:comidaFavorita:3");
+    }
+
     public void setEscolaridade(String escolaridade){
         dsl.selecionarCombo("elementosForm:escolaridade", escolaridade);
     }
