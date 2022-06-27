@@ -5,9 +5,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 public class TesteCadastro {
 
@@ -92,7 +96,5 @@ public class TesteCadastro {
         page.cadastrar();
         Assert.assertEquals("Voce faz esporte ou nao?", dsl.alertaObterTextoEAceita());
     }
-
-
 
 }
